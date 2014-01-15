@@ -10,12 +10,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Disable the base shared folder, guest additions are unavailable.
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
-  config.vm.provider :virtualbox do |vb|
-   #vb.gui = true
-   #vb.customize ["modifyvm", :id, "--memory", "1024"]
+  config.vm.provider :virtualbox do |v|
+   #v.gui = true
+   #v.customize ["modifyvm", :id, "--memory", "1024"]
   end
 
-  config.vm.provider :vmware_workstation do |vb|
-   #vb.gui = true
+  config.vm.provider :vmware_workstation do |v|
+   #v.gui = true
   end
 end
