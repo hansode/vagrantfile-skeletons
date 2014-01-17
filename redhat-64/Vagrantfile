@@ -7,14 +7,14 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "redhat-64"
 
-  config.vm.provider :virtualbox do |v|
+  config.vm.provider :virtualbox do |v, override|
    # Disable the base shared folder, guest additions are unavailable.
    #config.vm.synced_folder ".", "/vagrant", disabled: true
    #v.gui = true
    #v.customize ["modifyvm", :id, "--memory", "1024"]
   end
 
-  config.vm.provider :vmware_workstation do |v|
+  config.vm.provider :vmware_workstation do |v, override|
    # Disable the base shared folder, guest additions are unavailable.
     config.vm.synced_folder ".", "/vagrant", disabled: true
    #v.gui = true
