@@ -18,5 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    # Disable the base shared folder, guest additions are unavailable.
     config.vm.synced_folder ".", "/vagrant", disabled: true
    #v.gui = true
+   #v.vmx["memsize"]  = "2048"
+   #v.vmx["numvcpus"] = "2"
   end
 end
