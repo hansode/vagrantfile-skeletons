@@ -21,4 +21,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    #v.vmx["memsize"]  = "2048"
    #v.vmx["numvcpus"] = "2"
   end
+
+ #config.vm.provision "shell", path: "bootstrap.sh"
 end
