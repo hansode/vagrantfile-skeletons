@@ -1,0 +1,36 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "centos-6-x86_64"
+
+  config.vm.provider :vmware_workstation do |v, override|
+    config.vm.synced_folder ".", "/vagrant", disabled: true
+    v.gui = true
+
+    # eth1
+    v.vmx["ethernet1.present"]        = "TRUE"
+    v.vmx["ethernet1.vnet"]           = "VMnet11"
+    v.vmx["ethernet1.connectionType"] = "custom"
+    v.vmx["ethernet1.virtualDev"]     = "e1000"
+    v.vmx["ethernet1.wakeOnPcktRcv"]  = "FALSE"
+    v.vmx["ethernet1.addressType"]    = "generated"
+  end
+
+  config.vm.define "node01" do |node|
+    node.vm.provider :vmware_workstation do |v, override|
+      v.vmx["ethernet1.addressType"] = "static"
+      v.vmx["ethernet1.address"]     = "52:54:00:00:01:01"
+    end
+  end
+
+  config.vm.define "node02" do |node|
+    node.vm.provider :vmware_workstation do |v, override|
+      v.vmx["ethernet1.addressType"] = "static"
+      v.vmx["ethernet1.address"]     = "52:54:00:00:02:01"
+    end
+  end
+end
