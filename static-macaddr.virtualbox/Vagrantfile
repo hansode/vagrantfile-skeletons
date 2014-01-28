@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "centos-6-x86_64"
+
+  config.vm.provider :virtualbox do |v, override|
+    config.vm.synced_folder ".", "/vagrant", disabled: true
+
+    # eth1
+    v.customize ["modifyvm", :id, "--nic2", "intnet"]
+  end
+
+  config.vm.define "node01" do |node|
+    node.vm.provider :virtualbox do |v, override|
+      v.customize ["modifyvm", :id, "--macaddress2", "525400000101"]
+    end
+  end
+
+  config.vm.define "node02" do |node|
+    node.vm.provider :virtualbox do |v, override|
+      v.customize ["modifyvm", :id, "--macaddress2", "525400000201"]
+    end
+  end
+end
