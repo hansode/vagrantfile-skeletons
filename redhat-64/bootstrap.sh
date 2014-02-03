@@ -25,6 +25,6 @@ _addpkgs="
  curl
 "
 
-if [[ -n "${addpkgs}" ]]; then
+if [[ -n "$(echo ${addpkgs})" ]]; then
   yum install -y ${addpkgs}
 fi
